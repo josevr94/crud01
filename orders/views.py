@@ -19,3 +19,8 @@ def order_created(request):
 def order_list(request):
     orders = Order.objects.all()
     return render(request,'orders/order_list.html',{'orders':orders})
+
+
+def report_view(request):
+    orders = Order.objects.select_related('product').all()
+    return render(request,'orders/reports.html',{'orders': orders})

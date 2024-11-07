@@ -1,0 +1,29 @@
+{% load custom_filter %}
+<h1>Reporte de Ordenes y Productos</h1>
+
+<table>
+    <tr>
+        <th>ID de Orden</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio Unitario</th>
+        <th>Total</th>
+        <th>Fecha</th>
+    </tr>
+    <tr>
+        
+        {% for order in orders %}
+            
+        
+            
+        <td>{{order.id}}</td>
+        <td>{{order.product.name}}</td>
+        <td>{{order.quantity}}</td>
+        <td>{{order.product.price}}</td>
+        <td>{{order.quantity|multiply:order.product.price}}</td> 
+        {% comment %} la linea de arriba sirve para hacer un pequeño reporte que multiplica la cantidad por el precio de una orden {% endcomment %}
+        <td>{{order.created_at}}</td>
+        
+    </tr>
+    {% endfor %}
+</table>
