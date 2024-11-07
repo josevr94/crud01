@@ -16,7 +16,7 @@ def product_created(request):
 
 def product_list(request):
     products = Product.objects.all()
-    return render(request,'poducts/product_list',{'products':products}) 
+    return render(request,'poducts/product_list.html',{'products':products}) 
 
 def product_detail(request,id):
     product = get_object_or_404(Product,pk=id)    
@@ -32,3 +32,10 @@ def product_update(request,id):
     else:
         form = ProductForm()
     return render(request,'poducts/product_form.html',{'form': form})        
+
+def product_delete(request,id):
+    product = get_object_or_404(Product,pk=id)
+    if request.method =='POST':
+        product.delete()
+        return redirect('product_list')
+    return render(request,'poducts/product_confirm_delete.html',{'product':product}) 
